@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Asso index{% endblock %}
+
+{% block body %}
+    <h1>Asso index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Img_asso</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asso in assos %}
+            <tr>
+                <td>{{ asso.id }}</td>
+                <td>{{ asso.name }}</td>
+                <td>{{ asso.description }}</td>
+                <td>
+                    <a href="{{ path('app_asso_show', {'id': asso.id}) }}">show</a>
+                    <a href="{{ path('app_asso_edit', {'id': asso.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_asso_new') }}">Create new</a>
+{% endblock %}
