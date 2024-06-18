@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Teams;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MembersType extends AbstractType
 {
@@ -17,9 +18,10 @@ class MembersType extends AbstractType
             ->add('description')
             ->add('name_member')
             ->add('img_member')
-            ->add('TEAMS', 
+            ->add('teams', 
             EntityType::class, 
-            [ 'class' => Teams::class, 'choice_label' => 'name', ]);
+            [ 'class' => Teams::class, 'choice_label' => 'name_team', 'multiple' => true,
+            'expanded' => true]);
         ;
     }
 

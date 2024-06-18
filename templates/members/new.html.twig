@@ -3,9 +3,9 @@
 {% block title %}New Members{% endblock %}
 
 {% block body %}
-    <h1>Create new Members</h1>
+    <h1 class="text-center">Créer un nouveau membre</h1>
 
     {{ include('members/_form.html.twig') }}
 
-    <a href="{{ path('app_members_index') }}">back to list</a>
+    <div class="text-center"><a href="{{ path('app_members_index') }}">Retour à la liste</a></div>
 {% endblock %}

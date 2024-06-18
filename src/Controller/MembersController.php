@@ -25,6 +25,7 @@ class MembersController extends AbstractController
     #[Route('/new', name: 'app_members_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $member = new Members();
         $form = $this->createForm(MembersType::class, $member);
         $form->handleRequest($request);

@@ -25,6 +25,7 @@ class SectionsController extends AbstractController
     #[Route('/new', name: 'app_sections_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $section = new Sections();
         $form = $this->createForm(SectionsType::class, $section);
         $form->handleRequest($request);

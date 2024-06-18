@@ -1,4 +1,24 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="container d-flex justify-content-center align-items-center">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="form-group">
+						{{ form_start(form) }}
+						<label class="form-label">Nom de la team:</label><br>{{ form_widget(form.name_team) }}
+						<label class="form-label">Description de la team:</label><br>{{ form_widget(form.description) }}
+						<label class="form-label">Image de la team:</label><br>{{ form_widget(form.img_team) }}
+						<div class="container d-flex justify-content-center align-items-center">
+							<div class="row">
+								<div class="col-12">
+									<button type="submit" class="btn btn-primary mt-3">{{ button_label|default('Save') }}</button>
+								</div>
+							</div>
+						</div>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

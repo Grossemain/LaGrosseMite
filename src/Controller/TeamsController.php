@@ -25,6 +25,7 @@ class TeamsController extends AbstractController
     #[Route('/new', name: 'app_teams_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $team = new Teams();
         $form = $this->createForm(TeamsType::class, $team);
         $form->handleRequest($request);
