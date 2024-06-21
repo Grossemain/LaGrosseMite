@@ -1,34 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Asso{% endblock %}
+{% block title %}Asso
+{% endblock %}
 
 {% block body %}
-    <h1>Asso</h1>
+	<h1>Asso</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ asso.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ asso.name }}</td>
-            </tr>
-            <tr>
-                <th>Img_asso</th>
-                <td>{{ asso.imgAsso }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ asso.description }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ asso.id }}</td>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<td>{{ asso.name }}</td>
+			</tr>
+			<tr>
+				<th>Img_asso</th>
+				<td>{{ asso.imgAsso }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ asso.description }}</td>
+			</tr>
+		</tbody>
+	</table>
     <a href="{{ path('app_asso_index') }}">back to list</a>
-
-    <a href="{{ path('app_asso_edit', {'id': asso.id}) }}">edit</a>
-
-    {{ include('asso/_delete_form.html.twig') }}
+    
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('app_asso_edit', {'id': asso.id}) }}">edit</a>
+		{{ include('asso/_delete_form.html.twig') }}
+	{% endif %}
 {% endblock %}

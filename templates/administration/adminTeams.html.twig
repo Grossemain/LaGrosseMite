@@ -1,0 +1,42 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Hello Administration des teams!{% endblock %}
+
+{% block body %}
+<h1 class="text-light">Administration des teams</h1>
+<button><a href="{{ path('app_teams_new') }}">Créer une nouvelle team</a></button>
+<button><a href="/teams/">Voir les teams</a></button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name_team</th>
+            <th>Img_team</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for team in teams %}
+        <tr>
+            <td>{{ team.id }}</td>
+            <td>{{ team.nameTeam }}</td>
+            <td>{{ team.imgTeam }}</td>
+            <td>{{ team.description }}</td>
+            <td>
+                <a href="{{ path('app_teams_show', {'id': team.id}) }}">show</a>
+                <a href="{{ path('app_admin_teams_edit', {'id': team.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}

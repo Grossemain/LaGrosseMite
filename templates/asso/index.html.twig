@@ -1,39 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Asso index{% endblock %}
+{% block title %}Asso index
+{% endblock %}
 
 {% block body %}
-    <h1>Asso index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Img_asso</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for asso in assos %}
-            <tr>
-                <td>{{ asso.id }}</td>
-                <td>{{ asso.name }}</td>
-                <td>{{ asso.description }}</td>
-                <td>
-                    <a href="{{ path('app_asso_show', {'id': asso.id}) }}">show</a>
-                    <a href="{{ path('app_asso_edit', {'id': asso.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_asso_new') }}">Create new</a>
+ <div class="container-fluid text-center">
+		<h1>Asso index</h1>
+        <span><a href="{{ path('app_asso_new') }}">Create new</a></span>
+		<div class="d-md-flex flex-md-wrap bg-primary">
+			{% for asso in assos %}
+			<div class="flex-md-fill col-md-3 card m-4 ">
+					<div class="card-body">
+						<span>{{ asso.id }}</span>
+						<h2 class="card-title">{{ asso.name }}</h2>
+						<p class="card-text">{{ asso.description }}</p>
+						{# <span>{{ asso.img_asso }}</span> #}
+						<div class="card-footer">
+							<span>
+								<a href="{{ path('app_asso_show', {'id': asso.id}) }}">show</a>
+							</span>
+							<span>
+								<a href="{{ path('app_asso_edit', {'id': asso.id}) }}">edit</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<span>no records found</span>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

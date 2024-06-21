@@ -1,0 +1,45 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Hello Administration des sections!
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-light">Administration des sections</h1>
+	<button>
+		<a href="{{ path('app_admin_sections_new') }}">Créer une nouvelle technique</a>
+		<button>
+			<a href="/sections/">Voir les techniques</a>
+		</button>
+	</button>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>NameSection</th>
+				<th>Description</th>
+				<th>Img_section</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for section in sections %}
+				<tr>
+					<td>{{ section.id }}</td>
+					<td>{{ section.nameSection }}</td>
+					<td>{{ section.description }}</td>
+					<td>{{ section.imgSection }}</td>
+					<td>
+						<a href="{{ path('app_sections_show', {'id': section.id}) }}">show</a>
+						<a href="{{ path('app_admin_sections_edit', {'id': section.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}

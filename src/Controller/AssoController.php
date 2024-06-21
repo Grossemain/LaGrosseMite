@@ -22,25 +22,25 @@ class AssoController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_asso_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $asso = new Asso();
-        $form = $this->createForm(AssoType::class, $asso);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_asso_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $asso = new Asso();
+    //     $form = $this->createForm(AssoType::class, $asso);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($asso);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($asso);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_asso_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_asso_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('asso/new.html.twig', [
-            'asso' => $asso,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('asso/new.html.twig', [
+    //         'asso' => $asso,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_asso_show', methods: ['GET'])]
     public function show(Asso $asso): Response

@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Teams index{% endblock %}
+{% block title %}Teams index
+{% endblock %}
 
 {% block body %}
-    <h1>Teams index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name_team</th>
-                <th>Img_team</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-            <tr>
-                <td>{{ team.id }}</td>
-                <td>{{ team.nameTeam }}</td>
-                <td>{{ team.imgTeam }}</td>
-                <td>{{ team.description }}</td>
-                <td>
-                    <a href="{{ path('app_teams_show', {'id': team.id}) }}">show</a>
-                    <a href="{{ path('app_teams_edit', {'id': team.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_teams_new') }}">Create new</a>
+<div class="container-fluid text-center">
+		<h1>Teams index</h1>
+		{% if is_granted('ROLE_ADMIN') %}
+        <span><a href="{{ path('app_teams_new') }}">Create new</a></span>
+		{% endif %}
+		<div class="d-md-flex flex-md-wrap bg-primary">
+            {% for team in teams %}
+			<div class="flex-md-fill col-md-3 card m-4 ">
+					<div class="card-body">
+						<span>{{ team.id }}</span>
+						<h2 class="card-title">{{ team.nameTeam }}</h2>
+						<p class="card-text">{{ team.description }}</p>
+						{# <span>{{ team.imgTeam }}</span> #}
+						{% if is_granted('ROLE_ADMIN') %}
+						<div class="card-footer">
+							<span>
+								<a href="{{ path('app_teams_show', {'id': team.id}) }}">show</a>
+							</span>
+							<span>
+								<a href="{{ path('app_teams_edit', {'id': team.id}) }}">edit</a>
+							</span>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			{% else %}
+				<span>no records found</span>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

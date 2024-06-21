@@ -1,39 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Members index{% endblock %}
+{% block title %}Members index
+{% endblock %}
 
 {% block body %}
-    <h1>Members index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>Name_member</th>
-                <th>Img_member</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for member in members %}
-            <tr>
-                <td>{{ member.id }}</td>
-                <td>{{ member.description }}</td>
-                <td>{{ member.nameMember }}</td>
-                <td>{{ member.imgMember }}</td>
-                <td>
-                    <a href="{{ path('app_members_show', {'id': member.id}) }}">show</a>
-                    <a href="{{ path('app_members_edit', {'id': member.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_members_new') }}">Create new</a>
+	<div class="container-fluid text-center">
+		<h1>Liste des membres</h1>
+		{% if is_granted('ROLE_ADMIN') %}
+		<span><a href="{{ path('app_members_new') }}">Create new</a></span>
+		{% endif %}
+		<div class="d-md-flex flex-md-wrap bg-primary">
+			{% for member in members %}
+				<div class="flex-md-fill col-md-3 card m-4 ">
+						<div class="card-body">
+							<span>{{ member.id }}</span>
+							<h2 class="card-title">{{ member.nameMember }}</h2>
+							<p class="card-text">{{ member.description }}</p>
+							<span>{{ member.imgMember }}</span></br>
+							<button class="btn btn-primary "><a href="{{ path('app_members_show', {'id': member.id}) }}" class="link-light text-decoration-none">Fiche {{ member.nameMember }}</a></button>
+							{% if is_granted('ROLE_ADMIN') %}
+							<div class="card-footer">
+								<span>
+									<a href="{{ path('app_members_show', {'id': member.id}) }}">show</a>
+								</span>
+								<span>
+									<a href="{{ path('app_members_edit', {'id': member.id}) }}">edit</a>
+								</span>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				{% else %}
+					<span>no records found</span>
+				</div>
+			{% endfor %}
+		</div>
 {% endblock %}

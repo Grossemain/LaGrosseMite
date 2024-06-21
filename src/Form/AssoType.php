@@ -6,6 +6,8 @@ use App\Entity\Asso;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class AssoType extends AbstractType
 {
@@ -13,8 +15,21 @@ class AssoType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('img_asso')
             ->add('description')
+            ->add('img_asso', FileType::class, [
+                'label' => 'Photo de l’article',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                new File([
+                'maxSize' => '5000k',
+                'mimeTypes' => [
+                'image/*',
+                ],
+                'mimeTypesMessage' => 'Image trop lourde',
+                ])
+                ],
+                ])
         ;
     }
 

@@ -1,0 +1,46 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Administration des membres!
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-light">Administration des membres</h1>
+	<button>
+		<a href="{{ path('app_admin_members_new') }}">Créer un nouveau membre</a>
+		<button>
+			<a href="/members/">Voir les Membres</a>
+		</button>
+	</button>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name_member</th>
+				<th>Description</th>
+				<th>Img_member</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for member in members %}
+				<tr>
+					<td>{{ member.id }}</td>
+					<td>{{ member.nameMember }}</td>
+					<td>{{ member.description }}</td>
+					<td>{{ member.imgMember }}</td>
+					<td>
+						<a href="{{ path('app_members_show', {'id': member.id}) }}">show</a>
+						<a href="{{ path('app_admin_members_edit', {'id': member.id}) }}">edit</a>
+						{# <a href="{{ path('app_admin_members_delete', {'id': member.id}) }}">delete</a> #}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}
